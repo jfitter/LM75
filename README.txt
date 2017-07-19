@@ -5,7 +5,7 @@ temperature of batteries and motor controllers used in
 remotely piloted aircraft, for the purpose of real time
 data logging and air to ground telemetry.
 
-This sensors uses the I2C bus protocol to communicate
+This sensor uses the I2C bus protocol to communicate
 allowing the Arduino standard Wire library to communicate
 with the device. 2 pins are required to interface the 
 device to an Arduino - the SDA and SCL lines.
@@ -27,4 +27,4 @@ folder. You may need to create the libraries subfolder if its your
 first library.
 Restart the IDE.
 
-LM75.chm contains the documentation for the classes.
+LM75.chm contains the documentation for the class.
