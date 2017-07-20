@@ -230,96 +230,100 @@
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    Wire.write(reg);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="comment">// resend device address then get the returned byte</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    Wire.requestFrom(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>, (uint8_t)1);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="comment">// data is returned as 1 byte</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">return</span> Wire.read();</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"> *  \brief            Return a 16 bit register value from the device.</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"> *  \param [in] reg   16b Register to read from.</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"> *  \return           Value read from register.</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">  196</a></span>&#160;uint16_t <a class="code" href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">LM75::read16</a>(uint8_t reg) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    uint16_t val;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    Wire.write(reg);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">// resend device address then get the 2 returned bytes</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    Wire.requestFrom(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>, (uint8_t)2);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="comment">// data is returned as 2 bytes big endian</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    val = Wire.read() &lt;&lt; 8;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    val |= Wire.read();</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">return</span> val;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"> *  \brief            Write a value to an 8 bit register in the device.</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment"> *  \param [in] reg   Register to write to.</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"> *  \param [in] data  Value to write.</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">  218</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">LM75::write8</a>(uint8_t reg, uint8_t data) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    Wire.write(reg);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="comment">// write the data</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    Wire.write(data);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"> *  \brief            Write a value to a 16 bit register in the device.</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"> *  \param [in] reg   Register to write to.</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"> *  \param [in] data  Value to write.</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">  233</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">LM75::write16</a>(uint8_t reg, uint16_t data) {</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    Wire.write(reg);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="comment">// write the data high byte first</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    Wire.write(highByte(data));</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    Wire.write(lowByte(data));</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees C to degrees K.</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment"> *  \param [in] degC  Temperature in degrees Centigrade.</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"> *  \return           Temperature in degrees Kelvin.</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">  249</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">LM75::convCtoK</a>(<span class="keywordtype">double</span> degC) {<span class="keywordflow">return</span> degC + 273.15;}</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees C to degrees F.</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"> *  \param [in] degC  Temperature in degrees Centigrade.</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"> *  \return           Temperature in degrees Fahrenheit.</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">  256</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">LM75::convCtoF</a>(<span class="keywordtype">double</span> degC) {<span class="keywordflow">return</span> (degC * 9. / 5.) + 32.;}</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees K to degrees C.</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"> *  \param [in] degK  Temperature in degrees Kelvin.</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment"> *  \return           Temperature in degrees Centigrade.</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">  263</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">LM75::convKtoC</a>(<span class="keywordtype">double</span> degK) {<span class="keywordflow">return</span> degK - 273.15;}</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees F to degrees C.</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment"> *  \param [in] degF  Temperature in degrees Fahrenheit.</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"> *  \return           Temperature in degrees Centigrade.</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">  270</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">LM75::convFtoC</a>(<span class="keywordtype">double</span> degF) {<span class="keywordflow">return</span> (degF - 32.) * 5. / 9.;}</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    Wire.endTransmission(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="comment">// resend device address then get the returned byte</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    Wire.requestFrom(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>, (uint8_t)1);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="comment">// data is returned as 1 byte</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> Wire.read();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"> *  \brief            Return a 16 bit register value from the device.</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"> *  \param [in] reg   16b Register to read from.</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"> *  \return           Value read from register.</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">  197</a></span>&#160;uint16_t <a class="code" href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">LM75::read16</a>(uint8_t reg) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    uint16_t val;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    Wire.write(reg);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    Wire.endTransmission(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">// resend device address then get the 2 returned bytes</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    Wire.requestFrom(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>, (uint8_t)2);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="comment">// data is returned as 2 bytes big endian</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    val = Wire.read() &lt;&lt; 8;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    val |= Wire.read();</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">return</span> val;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"> *  \brief            Write a value to an 8 bit register in the device.</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"> *  \param [in] reg   Register to write to.</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"> *  \param [in] data  Value to write.</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">  220</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">LM75::write8</a>(uint8_t reg, uint8_t data) {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    Wire.write(reg);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="comment">// write the data</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    Wire.write(data);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    Wire.endTransmission(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"> *  \brief            Write a value to a 16 bit register in the device.</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"> *  \param [in] reg   Register to write to.</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> *  \param [in] data  Value to write.</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">  236</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">LM75::write16</a>(uint8_t reg, uint16_t data) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">// send the device address then the register pointer byte</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    Wire.beginTransmission(<a class="code" href="class_l_m75.html#af76eee39ca511e2284988542f2fab1db">_addr</a>);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    Wire.write(reg);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="comment">// write the data high byte first</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    Wire.write(highByte(data));</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    Wire.write(lowByte(data));</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    Wire.endTransmission(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees C to degrees K.</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"> *  \param [in] degC  Temperature in degrees Centigrade.</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"> *  \return           Temperature in degrees Kelvin.</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">  253</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">LM75::convCtoK</a>(<span class="keywordtype">double</span> degC) {<span class="keywordflow">return</span> degC + 273.15;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees C to degrees F.</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"> *  \param [in] degC  Temperature in degrees Centigrade.</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment"> *  \return           Temperature in degrees Fahrenheit.</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">  260</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">LM75::convCtoF</a>(<span class="keywordtype">double</span> degC) {<span class="keywordflow">return</span> (degC * 1.8) + 32.0;}</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees K to degrees C.</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"> *  \param [in] degK  Temperature in degrees Kelvin.</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment"> *  \return           Temperature in degrees Centigrade.</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">  267</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">LM75::convKtoC</a>(<span class="keywordtype">double</span> degK) {<span class="keywordflow">return</span> degK - 273.15;}</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"> *  \brief            Convert temperature in degrees F to degrees C.</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"> *  \param [in] degF  Temperature in degrees Fahrenheit.</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment"> *  \return           Temperature in degrees Centigrade.</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">  274</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">LM75::convFtoC</a>(<span class="keywordtype">double</span> degF) {<span class="keywordflow">return</span> (degF - 32.0) / 1.8;}</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
 <div class="ttc" id="class_l_m75_html_ab80973db8f5e692fde8f31ad07730bdd"><div class="ttname"><a href="class_l_m75.html#ab80973db8f5e692fde8f31ad07730bdd">LM75::setOperationMode</a></div><div class="ttdeci">void setOperationMode(opMode=MODE_COMP)</div><div class="ttdoc">Set the device operation mode. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00145">LM75.cpp:145</a></div></div>
 <div class="ttc" id="class_l_m75_html_a7ef89d16df90b16213b06b982bbfe429"><div class="ttname"><a href="class_l_m75.html#a7ef89d16df90b16213b06b982bbfe429">LM75::setFaultQueue</a></div><div class="ttdeci">void setFaultQueue(faultQueue)</div><div class="ttdoc">Set the value of the OS fault queue. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00155">LM75.cpp:155</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_aeb0839f762754c10bd3da1fa7352012d"><div class="ttname"><a href="_l_m75_8h.html#aeb0839f762754c10bd3da1fa7352012d">LM75_CONF</a></div><div class="ttdeci">#define LM75_CONF</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00057">LM75.h:57</a></div></div>
@@ -333,9 +337,9 @@
 <div class="ttc" id="class_l_m75_html_a2a7ea6f324fe6d70e90dd76bac1d2f2d"><div class="ttname"><a href="class_l_m75.html#a2a7ea6f324fe6d70e90dd76bac1d2f2d">LM75::tempUnit_t</a></div><div class="ttdeci">tempUnit_t</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00088">LM75.h:88</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a335db4ddc27687bbb978bf7c097c7d1b"><div class="ttname"><a href="_l_m75_8h.html#a335db4ddc27687bbb978bf7c097c7d1b">LM75_CONF_DOM_SHUTDOWN</a></div><div class="ttdeci">#define LM75_CONF_DOM_SHUTDOWN</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00073">LM75.h:73</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a39f790caccbbc85cfaf15d0599d79be8"><div class="ttname"><a href="_l_m75_8h.html#a39f790caccbbc85cfaf15d0599d79be8">LM75_CONF_OSOM_COMP</a></div><div class="ttdeci">#define LM75_CONF_OSOM_COMP</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00070">LM75.h:70</a></div></div>
-<div class="ttc" id="class_l_m75_html_a5ab4d982bd8371bff5a33b4e486a0edc"><div class="ttname"><a href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">LM75::write8</a></div><div class="ttdeci">void write8(uint8_t, uint8_t)</div><div class="ttdoc">Write a value to an 8 bit register in the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00218">LM75.cpp:218</a></div></div>
+<div class="ttc" id="class_l_m75_html_a5ab4d982bd8371bff5a33b4e486a0edc"><div class="ttname"><a href="class_l_m75.html#a5ab4d982bd8371bff5a33b4e486a0edc">LM75::write8</a></div><div class="ttdeci">void write8(uint8_t, uint8_t)</div><div class="ttdoc">Write a value to an 8 bit register in the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00220">LM75.cpp:220</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a89fdab4daebf54e4563b639046f5320f"><div class="ttname"><a href="_l_m75_8h.html#a89fdab4daebf54e4563b639046f5320f">LM75_THYST</a></div><div class="ttdeci">#define LM75_THYST</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00060">LM75.h:60</a></div></div>
-<div class="ttc" id="class_l_m75_html_ac7c608e0e2edf521c14872e3e01ed449"><div class="ttname"><a href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">LM75::convFtoC</a></div><div class="ttdeci">double convFtoC(double degF)</div><div class="ttdoc">Convert temperature in degrees F to degrees C. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00270">LM75.cpp:270</a></div></div>
+<div class="ttc" id="class_l_m75_html_ac7c608e0e2edf521c14872e3e01ed449"><div class="ttname"><a href="class_l_m75.html#ac7c608e0e2edf521c14872e3e01ed449">LM75::convFtoC</a></div><div class="ttdeci">double convFtoC(double degF)</div><div class="ttdoc">Convert temperature in degrees F to degrees C. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00274">LM75.cpp:274</a></div></div>
 <div class="ttc" id="class_l_m75_html_a6f4b5e329a3a5cba53f264fb3969e49b"><div class="ttname"><a href="class_l_m75.html#a6f4b5e329a3a5cba53f264fb3969e49b">LM75::read8</a></div><div class="ttdeci">uint8_t read8(uint8_t)</div><div class="ttdoc">Return an 8 bit register value from the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00178">LM75.cpp:178</a></div></div>
 <div class="ttc" id="class_l_m75_html_a199325ea8f9a90a2150587371682fc44"><div class="ttname"><a href="class_l_m75.html#a199325ea8f9a90a2150587371682fc44">LM75::outputPolarity</a></div><div class="ttdeci">outputPolarity</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00097">LM75.h:97</a></div></div>
 <div class="ttc" id="class_l_m75_html_ae400ef90dd61fe676d10665a53e1e251"><div class="ttname"><a href="class_l_m75.html#ae400ef90dd61fe676d10665a53e1e251">LM75::readTemp</a></div><div class="ttdeci">double readTemp(tempUnit_t=LM75_TC)</div><div class="ttdoc">Return the measured temperature in specified units. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00072">LM75.cpp:72</a></div></div>
@@ -343,24 +347,24 @@
 <div class="ttc" id="class_l_m75_html_a6194e0c26b8fc717dade26a62070e976"><div class="ttname"><a href="class_l_m75.html#a6194e0c26b8fc717dade26a62070e976">LM75::opMode</a></div><div class="ttdeci">opMode</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00105">LM75.h:105</a></div></div>
 <div class="ttc" id="class_l_m75_html_a9215f53f9ba2e7daa70ae06e7aa1f09c"><div class="ttname"><a href="class_l_m75.html#a9215f53f9ba2e7daa70ae06e7aa1f09c">LM75::getAddr</a></div><div class="ttdeci">uint8_t getAddr(void)</div><div class="ttdoc">Return the device I2C Bus address. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00171">LM75.cpp:171</a></div></div>
 <div class="ttc" id="class_l_m75_html_a9f8dee59ac46f1c9740160402895dd5c"><div class="ttname"><a href="class_l_m75.html#a9f8dee59ac46f1c9740160402895dd5c">LM75::busAddr</a></div><div class="ttdeci">Property&lt; uint8_t, LM75 &gt; busAddr</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00085">LM75.h:85</a></div></div>
-<div class="ttc" id="class_l_m75_html_a01f19d9d8652641a2448021a5d09ecab"><div class="ttname"><a href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">LM75::convKtoC</a></div><div class="ttdeci">double convKtoC(double degK)</div><div class="ttdoc">Convert temperature in degrees K to degrees C. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00263">LM75.cpp:263</a></div></div>
+<div class="ttc" id="class_l_m75_html_a01f19d9d8652641a2448021a5d09ecab"><div class="ttname"><a href="class_l_m75.html#a01f19d9d8652641a2448021a5d09ecab">LM75::convKtoC</a></div><div class="ttdeci">double convKtoC(double degK)</div><div class="ttdoc">Convert temperature in degrees K to degrees C. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00267">LM75.cpp:267</a></div></div>
 <div class="ttc" id="class_l_m75_html_a1aaf5ed1081a108e996228bcdc00a2d6"><div class="ttname"><a href="class_l_m75.html#a1aaf5ed1081a108e996228bcdc00a2d6">LM75::setOutputPolarity</a></div><div class="ttdeci">void setOutputPolarity(outputPolarity=POL_LOW)</div><div class="ttdoc">Set the OS polarity. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00125">LM75.cpp:125</a></div></div>
 <div class="ttc" id="class_l_m75_html_adc17def542ebe019d6ef064bdcb37f10a65995a2615014d4805da07bdd2a70772"><div class="ttname"><a href="class_l_m75.html#adc17def542ebe019d6ef064bdcb37f10a65995a2615014d4805da07bdd2a70772">LM75::FQ_6</a></div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00112">LM75.h:112</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a1adc10eb80214a10365f084dfd55d4a2"><div class="ttname"><a href="_l_m75_8h.html#a1adc10eb80214a10365f084dfd55d4a2">LM75_CONF_DOM_NORMAL</a></div><div class="ttdeci">#define LM75_CONF_DOM_NORMAL</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00072">LM75.h:72</a></div></div>
 <div class="ttc" id="class_l_m75_html_a06a3ac4dcab0a65183d34f7deea4291e"><div class="ttname"><a href="class_l_m75.html#a06a3ac4dcab0a65183d34f7deea4291e">LM75::writeSetPoint</a></div><div class="ttdeci">void writeSetPoint(double, tempUnit_t=LM75_TC, setPointType=SPT_OVERTEMP)</div><div class="ttdoc">Write the specified setpoint supplied in the specified units. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00110">LM75.cpp:110</a></div></div>
 <div class="ttc" id="class_l_m75_html_a2a7ea6f324fe6d70e90dd76bac1d2f2da547e55f7743275a163e43576c120477b"><div class="ttname"><a href="class_l_m75.html#a2a7ea6f324fe6d70e90dd76bac1d2f2da547e55f7743275a163e43576c120477b">LM75::LM75_TK</a></div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00088">LM75.h:88</a></div></div>
 <div class="ttc" id="class_l_m75_html_a32d79ab5e1a4b80d9a52cb9d62b590e5"><div class="ttname"><a href="class_l_m75.html#a32d79ab5e1a4b80d9a52cb9d62b590e5">LM75::outputMode</a></div><div class="ttdeci">outputMode</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00101">LM75.h:101</a></div></div>
-<div class="ttc" id="class_l_m75_html_af3656fcf51812e2f4bfc93c1c01e99ef"><div class="ttname"><a href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">LM75::write16</a></div><div class="ttdeci">void write16(uint8_t, uint16_t)</div><div class="ttdoc">Write a value to a 16 bit register in the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00233">LM75.cpp:233</a></div></div>
+<div class="ttc" id="class_l_m75_html_af3656fcf51812e2f4bfc93c1c01e99ef"><div class="ttname"><a href="class_l_m75.html#af3656fcf51812e2f4bfc93c1c01e99ef">LM75::write16</a></div><div class="ttdeci">void write16(uint8_t, uint16_t)</div><div class="ttdoc">Write a value to a 16 bit register in the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00236">LM75.cpp:236</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a248da72c74c652dc1383858f7feb7d4a"><div class="ttname"><a href="_l_m75_8h.html#a248da72c74c652dc1383858f7feb7d4a">LM75_CONF_OSPOL_AL</a></div><div class="ttdeci">#define LM75_CONF_OSPOL_AL</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00068">LM75.h:68</a></div></div>
-<div class="ttc" id="class_l_m75_html_a25d48da08bf14dc858be423aa6862e67"><div class="ttname"><a href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">LM75::convCtoK</a></div><div class="ttdeci">double convCtoK(double degC)</div><div class="ttdoc">Convert temperature in degrees C to degrees K. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00249">LM75.cpp:249</a></div></div>
+<div class="ttc" id="class_l_m75_html_a25d48da08bf14dc858be423aa6862e67"><div class="ttname"><a href="class_l_m75.html#a25d48da08bf14dc858be423aa6862e67">LM75::convCtoK</a></div><div class="ttdeci">double convCtoK(double degC)</div><div class="ttdoc">Convert temperature in degrees C to degrees K. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00253">LM75.cpp:253</a></div></div>
 <div class="ttc" id="class_l_m75_html_a2fd78a5cbd54b7e9906231a401fb1dfc"><div class="ttname"><a href="class_l_m75.html#a2fd78a5cbd54b7e9906231a401fb1dfc">LM75::LM75</a></div><div class="ttdeci">LM75(uint8_t=LM75_I2CDEFAULTADDR)</div><div class="ttdoc">LM75 Device class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00048">LM75.cpp:48</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a78b878e1eea4dd6d47f4e7ec29001ab5"><div class="ttname"><a href="_l_m75_8h.html#a78b878e1eea4dd6d47f4e7ec29001ab5">LM75_CONF_OSFQUE_1</a></div><div class="ttdeci">#define LM75_CONF_OSFQUE_1</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00064">LM75.h:64</a></div></div>
 <div class="ttc" id="class_l_m75_html_a7efa68c775573baab4bda3bc4d498be6"><div class="ttname"><a href="class_l_m75.html#a7efa68c775573baab4bda3bc4d498be6">LM75::begin</a></div><div class="ttdeci">boolean begin()</div><div class="ttdoc">Initialize the device and the i2c interface. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00060">LM75.cpp:60</a></div></div>
-<div class="ttc" id="class_l_m75_html_a074cc687ec77ca65a266c612b9411687"><div class="ttname"><a href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">LM75::convCtoF</a></div><div class="ttdeci">double convCtoF(double degC)</div><div class="ttdoc">Convert temperature in degrees C to degrees F. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00256">LM75.cpp:256</a></div></div>
+<div class="ttc" id="class_l_m75_html_a074cc687ec77ca65a266c612b9411687"><div class="ttname"><a href="class_l_m75.html#a074cc687ec77ca65a266c612b9411687">LM75::convCtoF</a></div><div class="ttdeci">double convCtoF(double degC)</div><div class="ttdoc">Convert temperature in degrees C to degrees F. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00260">LM75.cpp:260</a></div></div>
 <div class="ttc" id="class_l_m75_html_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838"><div class="ttname"><a href="class_l_m75.html#ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838">LM75::SPT_OVERTEMP</a></div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00093">LM75.h:93</a></div></div>
 <div class="ttc" id="class_l_m75_html_a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc"><div class="ttname"><a href="class_l_m75.html#a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc">LM75::POL_LOW</a></div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00097">LM75.h:97</a></div></div>
 <div class="ttc" id="class_l_m75_html_a39cbe2f4df2383e180e8529f62c6b060"><div class="ttname"><a href="class_l_m75.html#a39cbe2f4df2383e180e8529f62c6b060">LM75::setOutputMode</a></div><div class="ttdeci">void setOutputMode(outputMode=MODE_COMP)</div><div class="ttdoc">Set the OS operation mode. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00135">LM75.cpp:135</a></div></div>
-<div class="ttc" id="class_l_m75_html_ae28f5277c854beb262ab65ac7185b039"><div class="ttname"><a href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">LM75::read16</a></div><div class="ttdeci">uint16_t read16(uint8_t)</div><div class="ttdoc">Return a 16 bit register value from the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00196">LM75.cpp:196</a></div></div>
+<div class="ttc" id="class_l_m75_html_ae28f5277c854beb262ab65ac7185b039"><div class="ttname"><a href="class_l_m75.html#ae28f5277c854beb262ab65ac7185b039">LM75::read16</a></div><div class="ttdeci">uint16_t read16(uint8_t)</div><div class="ttdoc">Return a 16 bit register value from the device. </div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8cpp_source.html#l00197">LM75.cpp:197</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_a500d922a303002755a23e2de22b62d3b"><div class="ttname"><a href="_l_m75_8h.html#a500d922a303002755a23e2de22b62d3b">LM75_CONF_OSPOL_AH</a></div><div class="ttdeci">#define LM75_CONF_OSPOL_AH</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00069">LM75.h:69</a></div></div>
 <div class="ttc" id="class_l_m75_html_adc17def542ebe019d6ef064bdcb37f10ab097f0541ef6ffca709899a977e4d0ab"><div class="ttname"><a href="class_l_m75.html#adc17def542ebe019d6ef064bdcb37f10ab097f0541ef6ffca709899a977e4d0ab">LM75::FQ_1</a></div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00109">LM75.h:109</a></div></div>
 <div class="ttc" id="_l_m75_8h_html_aad8bc001c4b56d7d3648255bd5479b7f"><div class="ttname"><a href="_l_m75_8h.html#aad8bc001c4b56d7d3648255bd5479b7f">LM75_TOS</a></div><div class="ttdeci">#define LM75_TOS</div><div class="ttdef"><b>Definition:</b> <a href="_l_m75_8h_source.html#l00059">LM75.h:59</a></div></div>
@@ -371,7 +375,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 19 2017 19:33:27 for LM75 Device Driver by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 20 2017 13:52:38 for LM75 Device Driver by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

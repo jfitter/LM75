@@ -180,7 +180,8 @@ uint8_t LM75::read8(uint8_t reg) {
     // send the device address then the register pointer byte
     Wire.beginTransmission(_addr);
     Wire.write(reg);
-
+    Wire.endTransmission(false);
+    
     // resend device address then get the returned byte
     Wire.requestFrom(_addr, (uint8_t)1);
 
@@ -199,6 +200,7 @@ uint16_t LM75::read16(uint8_t reg) {
     // send the device address then the register pointer byte
     Wire.beginTransmission(_addr);
     Wire.write(reg);
+    Wire.endTransmission(false);
 
     // resend device address then get the 2 returned bytes
     Wire.requestFrom(_addr, (uint8_t)2);
@@ -223,6 +225,7 @@ void LM75::write8(uint8_t reg, uint8_t data) {
 
     // write the data
     Wire.write(data);
+    Wire.endTransmission(true);
 }
 
 /**
@@ -239,6 +242,7 @@ void LM75::write16(uint8_t reg, uint16_t data) {
     // write the data high byte first
     Wire.write(highByte(data));
     Wire.write(lowByte(data));
+    Wire.endTransmission(true);
 }
 
 /**
@@ -253,7 +257,7 @@ double LM75::convCtoK(double degC) {return degC + 273.15;}
  *  \param [in] degC  Temperature in degrees Centigrade.
  *  \return           Temperature in degrees Fahrenheit.
  */
-double LM75::convCtoF(double degC) {return (degC * 9. / 5.) + 32.;}
+double LM75::convCtoF(double degC) {return (degC * 1.8) + 32.0;}
 
 /**
  *  \brief            Convert temperature in degrees K to degrees C.
@@ -267,6 +271,6 @@ double LM75::convKtoC(double degK) {return degK - 273.15;}
  *  \param [in] degF  Temperature in degrees Fahrenheit.
  *  \return           Temperature in degrees Centigrade.
  */
-double LM75::convFtoC(double degF) {return (degF - 32.) * 5. / 9.;}
+double LM75::convFtoC(double degF) {return (degF - 32.0) / 1.8;}
 
 
