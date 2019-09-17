@@ -3,7 +3,9 @@
 
 /***********************************************************************************************//**
  *  \brief      LM75 Family Device Driver Library - CPP Header file
- *  \details    Based on the Melexis LM75 Family Data Sheet 3901090614 Rev 004 09jun2008.
+ *  \par
+ *  \par        Details
+ *              Based on the Melexis LM75 Family Data Sheet 3901090614 Rev 004 09jun2008.
  *  \li         The current implementation does not manage PWM (only digital data by I2C).
  *  \li         Sleep mode is not implemented yet.
  *
@@ -118,7 +120,7 @@ public:
     void writeSetPoint(double, tempUnit_t = LM75_TC, setPointType = SPT_OVERTEMP);
     void setOutputPolarity(outputPolarity = POL_LOW);
     void setOutputMode(outputMode = MODE_COMP);
-    void setOperationMode(opMode = MODE_COMP);
+    void setOperationMode(opMode = OPM_NORMAL);
     void setFaultQueue(faultQueue);
 
     double convCtoK(double degC);

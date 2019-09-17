@@ -1,6 +1,8 @@
 /***********************************************************************************************//**
  *  \brief      LM75 Family Device Driver Library - CPP Source file
- *  \details    Based on the LM75 Family Data Sheet 3901090614 Rev 004 09jun2008.
+ *  \par
+ *  \par        Details
+ *              Based on the LM75 Family Data Sheet 3901090614 Rev 004 09jun2008.
  *  \li         The current implementation does not manage PWM (only digital data by I2C).
  *  \li         Sleep mode is not implemented yet.
  *
@@ -74,10 +76,10 @@ double LM75::readTemp(tempUnit_t tunit) {
 
     temp = read16(LM75_TEMP) * 0.125/32.0;
     switch(tunit) {
-        case    LM75_TK : return convCtoK(temp);
-        case    LM75_TF : return convCtoF(temp);
-        default : return temp;
+        case LM75_TK : return convCtoK(temp);
+        case LM75_TF : return convCtoF(temp);
     }
+    return temp;
 }
 
 /**
@@ -180,7 +182,8 @@ uint8_t LM75::read8(uint8_t reg) {
     // send the device address then the register pointer byte
     Wire.beginTransmission(_addr);
     Wire.write(reg);
-    Wire.endTransmission(false);
+//    Wire.endTransmission(false);
+    Wire.endTransmission();
     
     // resend device address then get the returned byte
     Wire.requestFrom(_addr, (uint8_t)1);
@@ -200,7 +203,8 @@ uint16_t LM75::read16(uint8_t reg) {
     // send the device address then the register pointer byte
     Wire.beginTransmission(_addr);
     Wire.write(reg);
-    Wire.endTransmission(false);
+//    Wire.endTransmission(false);
+    Wire.endTransmission();
 
     // resend device address then get the 2 returned bytes
     Wire.requestFrom(_addr, (uint8_t)2);
@@ -225,7 +229,8 @@ void LM75::write8(uint8_t reg, uint8_t data) {
 
     // write the data
     Wire.write(data);
-    Wire.endTransmission(true);
+//    Wire.endTransmission(true);
+    Wire.endTransmission();
 }
 
 /**
